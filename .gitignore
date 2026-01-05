@@ -1,0 +1,11 @@
+__pycache__/
+config.py
+.DS_Store
+.venv/
+*.pyc
+*.db
+*.sqlite
+*.sqlite3
+*.jpg
+*.jpeg
+*.png

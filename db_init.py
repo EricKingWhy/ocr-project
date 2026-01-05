@@ -17,7 +17,22 @@ def init():
                   code TEXT,
                   number TEXT,
                   date TEXT,
-                  amount TEXT)''')
+                  amount TEXT,
+                  address TEXT,
+                  tax_no TEXT,
+                  bank TEXT)''')
+
+    # Add missing columns for existing databases.
+    c.execute("PRAGMA table_info(invoices)")
+    existing = {row[1] for row in c.fetchall()}
+    columns = {
+        "address": "TEXT",
+        "tax_no": "TEXT",
+        "bank": "TEXT",
+    }
+    for name, col_type in columns.items():
+        if name not in existing:
+            c.execute(f"ALTER TABLE invoices ADD COLUMN {name} {col_type}")
     
     conn.commit()
     conn.close()
